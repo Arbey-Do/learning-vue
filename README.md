@@ -1,4 +1,4 @@
-# hello-world-v2
+# Test Aplication
 
 ## Project setup
 ```
