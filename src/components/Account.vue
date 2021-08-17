@@ -8,12 +8,9 @@
             </ul>
             <div class="mg-top">
                 <ActionsForBalance textButton="Abonar Saldo" @modifyBalance="increaseBalance" />
-                <ActionsForBalance textButton="Descontar Saldo" @modifyBalance="decreaseBalance" />
+                <ActionsForBalance textButton="Descontar Saldo" @modifyBalance="decreaseBalance" :disabled="disabled"/>
             </div>
         </div>
-        
-        
-        
 </template>
 
 <script>
@@ -27,17 +24,24 @@ export default {
         return {
             status: true,
             type: 'Visa',
-            balance: 1200,
+            balance: 1000,
             base: 50,
-            services: ['giro', 'abono', 'transferencia']
+            services: ['giro', 'abono', 'transferencia'],
+            disabled: false
         }
     },
     methods: {
         increaseBalance () {
+            if(this.disabled === true) { this.disabled = false }
             this.balance += this.base;
         },
         decreaseBalance () {
-            this.balance -= this.base;
+            if(this.balance >= this.base) {
+                this.balance -= this.base
+                if(this.balance === 0) {
+                    this.disabled = true
+                }
+            }
         }
     }
 }

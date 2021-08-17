@@ -1,11 +1,23 @@
 <template>
-    <button @click="this.$emit('modifyBalance')">{{ textButton }}</button>
+    <button @click="modifyBalance" :disabled="disabled">{{ textButton }}</button>
 </template>
 
 <script>
     export default {
+        data() {
+            return {}
+        },
         props: {
-            textButton: String
+            textButton: String,
+            disabled: {
+                type: Boolean,
+                default: false
+            }
+        },
+        methods: {
+            modifyBalance() {
+                this.$emit('modifyBalance');
+            }
         }
     }
 </script>
